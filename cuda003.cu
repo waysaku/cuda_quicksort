@@ -24,7 +24,9 @@ int main(int argc, char** argv)
 	float* device_out_data;
 	cudaMalloc((void**)&device_out_data, sizeof(float) * 1024);
 
-	dim3 grid(8, 8);
+	//dim3 grid(8, 8);
+	//dim3 threads(4, 4);
+	dim3 grid(1, 1);
 	dim3 threads(4, 4);
 
 	cuda_kernel<<< grid, threads, sizeof(float) * 1024 >>>(device_data, device_out_data);
