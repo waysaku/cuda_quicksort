@@ -73,7 +73,9 @@ long* qs(long ary[], long result_ary[]) {
 int main()
 {
     long len = LENG;
-    long i, tmp, r, ary[len], result[len];
+    long i, tmp, r;
+    long ary[len] = {0};
+    long result[len]; = {0};
 
     srand( (unsigned)time(NULL));
 
