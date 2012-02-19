@@ -18,15 +18,42 @@ void to_rondom(long *ary, long len)
     }
 }
 
-void sort(long *ary, long *result_ary, long ary_len)
+
+long partition(long *ary, long start, long end)
 {
-     long over_ary[ary_len] = {};
-     long min_ary[ary_len] = {};
+    long pivot = ary[start];
+    int i = start;
+    int j = end;
 
-     int i = 0;
-     int j = ary_len;
+    while(i < j) 
+    {
+	while(ary[i] <= pivot && i < j) {i++;}
+	while(ary[j] > pivot && j > i) {j--;}
 
+	if(i == j) 
+	{
+	    //todo
+	    break;
+	}
 
+	long over = ary[i];
+	ary[i] = ary[j];
+	ary[j] = over;
+	i++;
+	j--;
+    }
+    return i;
+}
+
+void quicksort(long *ary, long start, long end)
+{
+    if(end <= start)
+    {
+	return;
+    }
+    long j = partition(ary, start, end);
+    quicksort(ary, 0, j);
+    quicksort(ary, j, end -1);
 }
 
 int main()
@@ -48,12 +75,11 @@ int main()
     }
 
     printf("----------------------\n");
-    sort(ary, result, len);
-    //qs(ary, result);
+    quicksort(ary, 0, len - 1);
     
-    //for( i = 0; i < len; i++) {
-//	printf("%2d\n", result[i]);
- //   }
+    for( i = 0; i < len; i++) {
+	printf("%2d\n", ary[i]);
+    }
 
     return 0;
 }
