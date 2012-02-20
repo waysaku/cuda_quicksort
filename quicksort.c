@@ -27,12 +27,12 @@ long partition(long *ary, long start, long end)
 
     while(i < j) 
     {
-	while(ary[i] <= pivot && i < j) {i++;}
-	while(ary[j] > pivot && j > i) {j--;}
+	while(ary[i] < pivot && i < j) {i++;}
+	while(ary[j] >= pivot && j > i) {j--;}
 
 	if(i == j) 
 	{
-	    //todo
+	    i++;
 	    break;
 	}
 
@@ -52,24 +52,30 @@ void quicksort(long *ary, long start, long end)
 	return;
     }
     long j = partition(ary, start, end);
-    quicksort(ary, 0, j);
-    quicksort(ary, j, end -1);
+    if(j == end)
+    {
+	return;
+    }
+    quicksort(ary, start, j - 1);
+    quicksort(ary, j, end);
 }
 
 int main()
 {
     long i, tmp, r;
-    long ary[10] = {};
+    long ary[10] = {2, 1, 8, 7, 10, 9, 5, 3, 6, 4};
     long result[10] = {};
 
     long len = sizeof(ary) / sizeof(ary[0]);
 
+    /*
     for( i = 0; i < len; i++) {
 	ary[i] = i + 1;
     }
 
 
     to_rondom(ary, len);
+    */
     for( i = 0; i < len; i++) {
 	printf("%2d\n", ary[i]);
     }
